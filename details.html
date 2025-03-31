@@ -101,27 +101,5 @@
     <p>&copy; 2025 Assets Management System</p>
   </footer>
 
-  <script>
-    angular.module('app', [])
-.controller('FormController', function($scope, $http) {
-    $scope.user = {};
-    
-    $scope.submitForm = function() {
-        if ($scope.userForm.$valid) {
-            $http.post('http://localhost:3000/submit', $scope.user)
-                .then(response => {
-                    alert(response.data.message);
-                    console.log('Data saved:', response.data);
-                })
-                .catch(error => {
-                    alert('Error: ' + error.data.message);
-                    console.error(error);
-                });
-        } else {
-            alert('Please fix the errors before submitting.');
-        }
-    };
-});
-   </script>
-</body>
+  </body>
 </html>

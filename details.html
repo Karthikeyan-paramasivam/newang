@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Angular Form</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+  <style>
+    body {
+      background-color: #87CEEB; /* Sky Blue */
+      text-align: center;
+    }
+       form {
+      margin-top: 40px; /* Increased margin above form */
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group input {
+      margin-top: 10px; /* Added space after First Name */
+    }
+    button {
+      font-size: 22px;
+      padding: 15px 30px;
+      background-color: #005bb5;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #004494;
+    }
+  </style>
+</head>
+<body ng-app="app" ng-controller="FormController">
+  <header>
+    <h1>PIPPIN TITLE</h1>
+    <h1>Employee Inventory of Assets DetailS Form</h1>
+  </header>
+
+  <form name="userForm" ng-submit="submitForm()" novalidate>
+    <div class="form-group">
+      <label>Employee Code:</label>
+         <input type="text" ng-model="user.empCode" required>
+    </div>
+    <div class="form-group">
+      <label>Name:</label>
+      <input type="text" ng-model="user.Name" required>
+    </div>
+      <div class="form-group">
+      <label>Email ID:</label>
+      <input type="email" ng-model="user.email" required>
+    </div>
+  </div>
+  <div class="form-group">
+  <label>Monitor1:</label>
+  <input type="text" ng-model="user.monitor1" required>
+</div>
+<div class="form-group">
+  <label>Monitor1_Assets_id:</label>
+  <input type="text" ng-model="user.monitor1_Assets_id" required>
+</div>
+<div class="form-group">
+  <label>Monitor1_Serialnumber:</label>
+  <input type="text" ng-model="user.monitor1_Serialnumber" required>
+</div>
+<div class="form-group">
+  <label>Monitor2_Assets_id:</label>
+  <input type="text" ng-model="user.monitor2_Assets_id" required>
+</div>
+<div class="form-group">
+  <label>Monitor2_Serialnumber:</label>
+  <input type="text" ng-model="user.monitor2_Serialnumber" required>
+</div>
+<div class="form-group">
+  <label>Desktop:</label>
+  <input type="text" ng-model="user.desktop" required>
+  </div>
+  <div class="form-group">
+    <label>Laptop:</label>
+    <input type="text" ng-model="user.laptop" required>
+  </div>
+  <div class="form-group">
+  <label>Mouse:</label>
+    <input type="text" ng-model="user.mouse" required>
+  </div>
+  <div class="form-group">
+  <label>KeyBoard:</label>
+    <input type="text" ng-model="user.keyboard" required>
+  </div>
+  <div class="form-group">
+    <label>Headset:</label>
+      <input type="text" ng-model="user.headset" required>
+    </div>
+</div>
+     <button type="submit">Confirm</button>
+  </form>
+
+  <footer>
+    <p>&copy; 2025 Assets Management System</p>
+  </footer>
+
+  <script>
+    angular.module('app', [])
+.controller('FormController', function($scope, $http) {
+    $scope.user = {};
+    
+    $scope.submitForm = function() {
+        if ($scope.userForm.$valid) {
+            $http.post('http://localhost:3000/submit', $scope.user)
+                .then(response => {
+                    alert(response.data.message);
+                    console.log('Data saved:', response.data);
+                })
+                .catch(error => {
+                    alert('Error: ' + error.data.message);
+                    console.error(error);
+                });
+        } else {
+            alert('Please fix the errors before submitting.');
+        }
+    };
+});
+   </script>
+</body>
+</html>
